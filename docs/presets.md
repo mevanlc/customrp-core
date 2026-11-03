@@ -14,6 +14,9 @@ data = dump_preset(presence)               # bytes
 
 Errors raise `PresetError`, with a message that can be shown to users as is.
 
+`party_id` is a library extension and isn't stored in `.crp` files. Loading a preset uses the default
+party ID, `"CustomRP"`.
+
 ## Format
 
 A `.crp` file is what .NET's `XmlSerializer` produces for CustomRP's `Preset` struct:

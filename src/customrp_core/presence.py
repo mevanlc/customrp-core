@@ -82,6 +82,8 @@ class Presence:
     small_url: str = ""
     button1: Button = field(default_factory=Button)
     button2: Button = field(default_factory=Button)
+    #: Discord party identifier; empty uses CustomRP's default.
+    party_id: str = ""
 
     @property
     def effective_application_id(self) -> str:
@@ -389,7 +391,7 @@ def build_activity(presence: Presence, *, connected_at: datetime, started_at: da
     # CustomRP's UI disables the party for types other than Playing, and the timestamps for
     # Competing; this leaves them out of the payload instead.
     if p.type == ActivityType.PLAYING and p.party_size > 0 and p.party_max > 0:
-        activity["party"] = {"id": "CustomRP", "size": [p.party_size, p.party_max]}
+        activity["party"] = {"id": p.party_id or "CustomRP", "size": [p.party_size, p.party_max]}
 
     buttons = [{"label": b.label, "url": b.url} for b in p.buttons if b.label and b.url]
     put(activity, "buttons", buttons)

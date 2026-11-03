@@ -13,7 +13,7 @@ been verified.
 - Discord CDN images routed through `customrp.xyz/proxy`
 - Protecting a leading no-break space with a zero-width space
 - Raising `party_max` to `party_size`
-- Party ID `"CustomRP"`, sent only when both party numbers are above 0
+- Default party ID `"CustomRP"`, sent only when both party numbers are above 0
 - Buttons sent only when they have both a label and a URL
 - The five timestamp modes, including a custom start in the future becoming a countdown, and the local
   time refresh 5 seconds after midnight
@@ -24,6 +24,7 @@ been verified.
 
 | CustomRP | customrp-core | Why |
 |---|---|---|
+| Party ID is always `"CustomRP"` | Can be overridden with `party_id` | Applications can identify their own parties |
 | The UI disables the party for types other than Playing and the timestamps for Competing, but still sends values set earlier | Leaves them out of the payload | Matches what the UI shows the user |
 | Single-character fields are highlighted in red, but still sent | Treated as errors | Discord rejects them anyway; the error message is clearer |
 | Text boxes stop typing at the length limit | Too-long values are errors | A config file has no text box to stop you |

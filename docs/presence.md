@@ -17,6 +17,7 @@ An empty string always means "not set", and unset fields are left out of the pay
 | `details_url` | `str` | 256 chars | Makes the first line a link |
 | `state` | `str` | 128 bytes | Second line |
 | `state_url` | `str` | 256 chars | Makes the second line a link |
+| `party_id` | `str` | | Party identifier sent to Discord when the party is shown. Empty uses `"CustomRP"`. |
 | `party_size`, `party_max` | `int` | | "(2 of 4)" after the state. Only for `PLAYING`, and only when both are above 0 |
 | `timestamps` | `TimestampMode` | | Where the elapsed or remaining time comes from (see below) |
 | `custom_start`, `custom_end` | `datetime \| None` | | For `TimestampMode.CUSTOM`; naive datetimes are local time |

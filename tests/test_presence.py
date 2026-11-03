@@ -60,10 +60,18 @@ def test_build_does_not_change_the_input():
 
 
 def test_party_only_for_playing_and_max_raised():
-    activity, _ = build(Presence(party_size=5, party_max=2))
-    assert activity["party"]["size"] == [5, 5]
-    activity, _ = build(Presence(type=ActivityType.LISTENING, party_size=1, party_max=2))
+    activity, _ = build(Presence(party_id="room-123", party_size=5, party_max=2))
+    assert activity["party"] == {"id": "room-123", "size": [5, 5]}
+    activity, _ = build(Presence(type=ActivityType.LISTENING, party_id="room-123", party_size=1, party_max=2))
     assert "party" not in activity
+    activity, _ = build(Presence(party_id="room-123"))
+    assert "party" not in activity
+
+
+@pytest.mark.parametrize("party_id, expected", [("", "CustomRP"), ("room-123", "room-123")])
+def test_party_id(party_id, expected):
+    activity, _ = build(Presence(party_id=party_id, party_size=1, party_max=4))
+    assert activity["party"] == {"id": expected, "size": [1, 4]}
 
 
 def test_incomplete_buttons_are_skipped():
